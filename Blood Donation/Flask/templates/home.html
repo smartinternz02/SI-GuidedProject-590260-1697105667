@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blood Donation Web Page</title>
+    
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .navbar {
+            background-color: #4f4949;
+            overflow: hidden;
+            display:flex;
+            flex-direction:row;
+            justify-content:space-around;
+        }
+        
+        .navbar a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        
+        .navbar a:hover {
+            background-color: #ddd;
+            color: #000;
+        }
+        
+        #home {
+            
+            color: black;
+            text-align: center;
+            padding: 100px;
+            height:70vh;
+        }
+        h1{
+            font-size:30px;
+        }
+        
+        .img{
+            height:350px;
+            width:70%;
+        }
+        
+        #about {
+            background-image: url('https://res.cloudinary.com/dmr0nlka4/image/upload/v1698755639/u4c7wktdgtwc9jb4dfb5.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            padding: 80px;
+            height:65vh;
+        }
+        .para{
+            width:500px;
+        }
+        
+        #findthedonor {
+            background-image: url('https://res.cloudinary.com/dmr0nlka4/image/upload/v1698754966/iwder2rwhu5grcf0hbgs.jpg');
+            background-size: cover;
+            background-position: center;
+            color: black;
+            text-align:center;
+            padding: 100px;
+        }
+        
+        #form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Additional CSS for form elements */
+        form {
+            text-align: center; /* Center-align the form */
+        }
+        
+        label, input {
+            display: flex;
+            flex-direction:row;
+            margin-left:39%;
+            margin-bottom: 10px;
+        }
+        
+        button {
+            background-color: #9c0000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #660000;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#findthedonor">Find the Donor</a>
+    </div>
+
+    <section id="home">
+        <h1>Prediction of Blood Donation Behaviour</h1>
+        <p>
+            The goal of this project is to develop a machine leaming model
+            that can predict the likelihood of individuals donating blood
+            based on various factors. By analyzing historical data of blood
+            donors we aim to identify patterns and create a predictive model
+            that can assist blood banks and organizations in targeting
+            potential donors and improving blood supply management
+        </p>
+        <img src="https://res.cloudinary.com/dmr0nlka4/image/upload/v1698755565/mcmdp3oksitvdmjv1dyt.jpg" class="img"/>
+    </section>
+
+    <section id="about">
+        <h1>Prediction of Blood Donation<br> Behaviour</h1>
+        <p class="para">
+            The goal of this project is to develop a machine leaming model
+            that can predict the likelihood of individuals donating blood
+            based on various factors. By analyzing historical data of blood
+            donors we aim to identify patterns and create a predictive model
+            that can assist blood banks and organizations in targeting
+            potential donors and improving blood supply management.The dataset used 
+            in this project consists of records of blood donars, including features 
+            such as recency (months since last donation), frequency(number of times donated),
+            monetary(volume of blood donated), time(months since first donation) and 
+            the target variable indicating whether the donor donated blood in a 
+            specific period (e.g a particular month) the main objective of this 
+            project to build a robust machine learning model that can accurately 
+            predict blood donation Behaviour.
+        </p>
+    </section>
+
+    
+    <section id="findthedonor">
+        <h1>Find the Donor</h1>
+
+        <div id="form-container">
+            <h2>Enter Donor Details:</h2>
+            <form id="donor-form" action="{{ url_for('predict')}}" method="post">
+                <label for="recency">Recency (in months since last donation):</label>
+                <input type="number" id="recency" name="recency" required><br>
+
+                <label for="frequency">Frequency:</label>
+                <input type="number" id="frequency" name="frequency" required><br>
+
+                <label for="monetary">Monetary Value:</label>
+                <input type="number" id="monetary" name="monetary" required><br>
+
+                <label for="time">Time (in months since first donation):</label>
+                <input type="number" id="time" name="time" required><br>
+
+                <button type="button submit" onclick="predictDonor()">Predict</button>
+                <button type="button" onclick="clearForm()">Clear</button>
+            </form>
+            
+        </div>
+    </section>
+
+    <script>
+        async function predictDonor() {
+            // Check if any input is empty
+            if (
+                document.getElementById("recency").value === "" ||
+                document.getElementById("frequency").value === "" ||
+                document.getElementById("monetary").value === "" ||
+                document.getElementById("time").value === ""
+            ) {
+                alert("Please fill in all fields.");
+                return;
+            }
+        }
+    
+        function clearForm() {
+            // Clear all input values
+            document.getElementById("recency").value = "";
+            document.getElementById("frequency").value = "";
+            document.getElementById("monetary").value = "";
+            document.getElementById("time").value = "";
+    
+            // Clear the prediction result
+            document.getElementById("prediction-result").innerHTML = "";
+        }
+    </script>
+    
+    
+</body>
+</html>
+
+
+
